@@ -5,21 +5,21 @@ pipeline {
 
         stage('Clone Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/umanagesh789/student-feedback-system.git'
+                git url: 'https://github.com/peketishiny23csm-lgtm/student-feedback-system.git', branch: 'main'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t student-feedback-app .'
+                sh 'docker build -t student-feedback-app .'
             }
         }
 
         stage('Run Container') {
             steps {
-                bat 'docker stop student-app || exit 0'
-                bat 'docker rm student-app || exit 0'
-                bat 'docker run -d -p 5000:5000 --name student-app student-feedback-app'
+                sh 'docker stop student-app || true'
+                sh 'docker rm student-app || true'
+                sh 'docker run -d -p 5000:5000 --name student-app student-feedback-app'
             }
         }
 
